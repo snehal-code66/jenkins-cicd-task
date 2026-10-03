@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo 'Deploying Docker application...'
                 bat 'docker rm -f my-web-container || exit /b 0'
-                bat 'docker run -d --name my-web-container -p 8080:80 my-web-app:latest'
+                bat 'docker run -d --name my-web-container -p 8081:80 my-web-app:latest'
             }
         }
     }
