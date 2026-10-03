@@ -4,19 +4,23 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building the application...'
+                echo 'Building Docker image...'
+                bat 'docker build -t my-web-app:latest .'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing the application...'
+                echo 'Testing Docker image...'
+                bat 'docker image inspect my-web-app:latest'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the Docker application...'
+                echo 'Deploying Docker application...'
+                bat 'docker rm -f my-web-container || exit /b 0'
+                bat 'docker run -d --name my-web-container -p 8080:80 my-web-app:latest'
             }
         }
     }
